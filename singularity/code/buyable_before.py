@@ -1,12 +1,3 @@
-# file: buyable.py
-# Copyright (C) 2008 Evil Mr Henry, Phil Bordelon, and FunnyMan3595
-# This file is part of Endgame: Singularity.
-
-# Endgame: Singularity is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-
 # Endgame: Singularity is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -30,10 +21,6 @@ from numpy import int64
 
 numpy.seterr(all="ignore")
 array = numpy.array
-
-# OPTIMALIZÁCIA: Globálna konštanta namiesto vytvárania pri každom volaní
-ZERO_COST = array([0, 0, 0], int64)
-ZERO_COST.flags.writeable = False  # Označíme ako read-only pre bezpečnosť
 
 
 def spec_parse_cost(value):
@@ -61,34 +48,16 @@ class BuyableSpec(spec.GenericSpec, prerequisite.Prerequisite):
         prerequisite.Prerequisite.__init__(self, prerequisites)
 
         self.name = id
+        # This will be set when languages are (re)loaded
         self.description = ""
         self._cost = cost
-        # Cache + parametre pre kontrolu zmien
-        self._cost_cache = None
-        self._cache_params = None
 
     @property
     def cost(self):
-        # Aktuálne parametre
-        current_params = (
-            g.minutes_per_day,
-            g.seconds_per_day,
-            getattr(g.pl, "labor_bonus", 1)
-        )
-        
-        # Ak máme cache A parametre sa nezmenili
-        if self._cost_cache is not None and self._cache_params == current_params:
-            return self._cost_cache
-            
-        # Vypočítame nový výsledok
         cost = array(self._cost, int64)
         cost[labor] *= g.minutes_per_day * getattr(g.pl, "labor_bonus", 1)
         cost[labor] /= 10000
         cost[cpu] *= g.seconds_per_day
-        
-        # Uložíme cache + parametre
-        self._cost_cache = cost
-        self._cache_params = current_params
         return cost
 
     def describe_cost(self, cost, hide_time=False):
@@ -143,16 +112,9 @@ class Buyable(object):
         self.spec = spec
         self.prerequisites = spec.prerequisites
 
-        # OPTIMALIZÁCIA: Použite numpy.copy namiesto násobenia
-        # spec.cost už je numpy array, copy je rýchlejší ako array() + násobenie
-        if count == 1:
-            self.total_cost = spec.cost.copy()
-        else:
-            self.total_cost = spec.cost * count
-            self.total_cost[labor] //= count
-        
-        # OPTIMALIZÁCIA: copy je rýchlejší ako array()
-        self.cost_left = self.total_cost.copy()
+        self.total_cost = spec.cost * count
+        self.total_cost[labor] //= count
+        self.cost_left = array(self.total_cost, int64)
 
         self.count = count
         self.done = False
@@ -187,8 +149,7 @@ class Buyable(object):
 
     def finish(self, is_player=True, loading_savegame=False):
         if not self.done:
-            # OPTIMALIZÁCIA: Použitie globálnej konštanty
-            self.cost_left = ZERO_COST.copy()
+            self.cost_left = array([0, 0, 0], int64)
             self.done = True
 
             if is_player:

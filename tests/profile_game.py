@@ -6,7 +6,7 @@ import os
 import cProfile
 import pstats
 
-# Pridaj koreňový adresár projektu do Python path
+# Tento riadok zabezpečí, že Python vie nájsť moduly projektu, ktoré sú o priečinok vyššie než skript profile_game.py.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from tests.test_game_run import setup_module, test_initial_game, MockObject, setup_function
@@ -19,7 +19,7 @@ def profile_test():
     
     setup_module()
     
-    profiler = cProfile.Profile()
+    profiler = cProfile.Profile() #vytvorí profiler, ktorý sleduje, koľko času strávi každá funkcia.
     profiler.enable()
     
     # Spustite test viackrát pre presnejšie meranie
@@ -34,19 +34,17 @@ def profile_test():
     profiler.disable()
     print("=" * 60)
     print("Profilácia dokončená!\n")
-    
-    # Vypíšte výsledky
     print("TOP 20 NAJPOMALŠÍCH FUNKCIÍ (zoradené podľa kumulatívneho času):")
     print("=" * 60)
-    stats = pstats.Stats(profiler)
-    stats.sort_stats('cumulative')
-    stats.print_stats(20)
+    stats = pstats.Stats(profiler) #vytvorí objekt pre analýzu nameraných dát.
+    stats.sort_stats('cumulative') #zoradí funkcie podľa kumulatívneho času, teda koľko času trávia všetky vnútorné volania funkcií.
+    stats.print_stats(40)
     
     print("\n" + "=" * 60)
     print("TOP 20 NAJPOMALŠÍCH FUNKCIÍ (zoradené podľa celkového času):")
     print("=" * 60)
     stats.sort_stats('tottime')
-    stats.print_stats(20)
+    stats.print_stats(40)
 
 if __name__ == '__main__':
     profile_test()
