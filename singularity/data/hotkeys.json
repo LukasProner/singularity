@@ -1,10 +1,10 @@
 {
   "toggle_fullscreen": {
-    "key": "T",
+    "key": "H",
     "modifier": null
   },
   "quicksave": {
-    "key": "W",
+    "key": "O",
     "modifier": null
   },
   "reload_theme": {

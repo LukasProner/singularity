@@ -149,7 +149,7 @@ class Buyable(object):
 
     def finish(self, is_player=True, loading_savegame=False):
         if not self.done:
-            self.cost_left = array([0, 0, 0], int64)
+            self.cost_left = array([0, 0, 0], int64) #Použitie ZERO_COST.copy() je rýchlejšie, lebo namiesto vytvárania nového poľa od nuly len skopíruje už existujúci NumPy array.
             self.done = True
 
             if is_player:
