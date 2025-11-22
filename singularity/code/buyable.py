@@ -69,24 +69,20 @@ class BuyableSpec(spec.GenericSpec, prerequisite.Prerequisite):
 
     @property
     def cost(self):
-        # Aktuálne parametre
         current_params = (
             g.minutes_per_day,
             g.seconds_per_day,
             getattr(g.pl, "labor_bonus", 1)
         )
         
-        # Ak máme cache A parametre sa nezmenili
         if self._cost_cache is not None and self._cache_params == current_params:
             return self._cost_cache
             
-        # Vypočítame nový výsledok
         cost = array(self._cost, int64)
         cost[labor] *= g.minutes_per_day * getattr(g.pl, "labor_bonus", 1)
         cost[labor] /= 10000
         cost[cpu] *= g.seconds_per_day
         
-        # Uložíme cache + parametre
         self._cost_cache = cost
         self._cache_params = current_params
         return cost
@@ -143,15 +139,12 @@ class Buyable(object):
         self.spec = spec
         self.prerequisites = spec.prerequisites
 
-        # OPTIMALIZÁCIA: Použite numpy.copy namiesto násobenia
-        # spec.cost už je numpy array, copy je rýchlejší ako array() + násobenie
         if count == 1:
             self.total_cost = spec.cost.copy()
         else:
             self.total_cost = spec.cost * count
             self.total_cost[labor] //= count
         
-        # OPTIMALIZÁCIA: copy je rýchlejší ako array()
         self.cost_left = self.total_cost.copy()
 
         self.count = count
@@ -171,8 +164,6 @@ class Buyable(object):
     def description(self):
         return self.spec.description
 
-    # Note that this is a method, handled by a property to avoid confusing
-    # pickle.
     @property
     def available(self):
         return self.spec.available
@@ -187,7 +178,6 @@ class Buyable(object):
 
     def finish(self, is_player=True, loading_savegame=False):
         if not self.done:
-            # OPTIMALIZÁCIA: Použitie globálnej konštanty
             self.cost_left = ZERO_COST.copy()
             self.done = True
 

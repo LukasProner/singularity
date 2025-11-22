@@ -1,7 +1,3 @@
-# file: test_safety.py
-# Testy pre safety.py - error handling a logging modul
-# Demonštruje použitie MOCK, STUB a FAKE objektov
-
 import pytest
 from unittest.mock import Mock, patch
 from singularity.code import safety
@@ -46,7 +42,7 @@ def test_log_error_writes_to_stderr(capsys):
 @patch('logging.getLogger')
 def test_log_error_with_logger_handlers(mock_get_logger, capsys):
     mock_logger = Mock()
-    mock_logger.handlers = [Mock()]  # STUB: simuluje handler
+    mock_logger.handlers = [Mock()]  
     mock_get_logger.return_value = mock_logger
     
     safety.log_error("message: %s", "test")
@@ -88,10 +84,9 @@ def test_log_func_exc_logs_exception_info(capsys):
 
 # SAFE_CALL
 def test_safe_call_returns_result_on_success():
-    fake = FakeFunction(return_value=42)
+    fake = FakeFunction(return_value=67)
     result = safety.safe_call(fake)
-    
-    assert result == 42
+    assert result == 67
 
 
 def test_safe_call_returns_on_error_on_exception(capsys):
