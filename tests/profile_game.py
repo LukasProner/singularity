@@ -21,10 +21,10 @@ def profile_test():
     profiler = cProfile.Profile() 
     profiler.enable()
     
-    iterations = 100
+    iterations = 10000
     print(f"Vykonávam test {iterations}x pre presnejšie meranie...")
     for i in range(iterations):
-        print(f"  Iterácia {i+1}/{iterations}...") 
+        # print(f"  Iterácia {i+1}/{iterations}...") 
         setup_function(test_initial_game)
         test_initial_game()
     

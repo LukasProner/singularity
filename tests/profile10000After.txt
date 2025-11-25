@@ -1,0 +1,114 @@
+
+C:\ESS\MySingularity\singularity>python tests\profile_game.py
+pygame 2.6.1 (SDL 2.28.4, Python 3.12.5)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Spúšťam profiláciu...
+============================================================
+Vykonávam test 10000x pre presnejšie meranie...
+============================================================
+Profilácia dokončená!
+
+TOP 20 NAJPOMALŠÍCH FUNKCIÍ (zoradené podľa kumulatívneho času):
+============================================================
+         139196594 function calls (113606594 primitive calls) in 77.568 seconds
+
+   Ordered by: cumulative time
+   List reduced from 219 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    10000    0.424    0.000   77.552    0.008 C:\ESS\MySingularity\singularity\tests\test_game_run.py:35(test_initial_game)
+    10000    0.402    0.000   65.236    0.007 C:\ESS\MySingularity\singularity\tests\test_game_run.py:25(save_and_load_game)
+    10000    0.223    0.000   48.330    0.005 C:\ESS\MySingularity\singularity\singularity\code\savegame.py:844(write_game_to_fd)
+    10000    5.701    0.001   44.252    0.004 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py:120(dump)
+ 10610000    3.165    0.000   26.199    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:414(_iterencode)
+32070000/10610000   11.993    0.000   23.019    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:334(_iterencode_dict)
+    10000    0.140    0.000   16.476    0.002 C:\ESS\MySingularity\singularity\singularity\code\savegame.py:352(load_savegame_fd)
+13900000/9790000    7.058    0.000   16.334    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:278(_iterencode_list)
+    10000    0.126    0.000   15.355    0.002 C:\ESS\MySingularity\singularity\singularity\code\savegame.py:374(load_savegame_by_json)
+    10000    0.265    0.000   14.022    0.001 C:\ESS\MySingularity\singularity\singularity\code\player.py:679(deserialize_obj)
+ 10600000    7.087    0.000   12.274    0.000 <frozen codecs>:373(write)
+    40000    0.634    0.000    9.642    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:665(_load_auto_deserializable_tables)
+    20000    1.604    0.000    7.192    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:72(__init__)
+  1710000    1.359    0.000    7.149    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:55(__init__)
+   570000    0.932    0.000    6.475    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:98(deserialize_obj)
+    10000    0.378    0.000    6.419    0.001 C:\ESS\MySingularity\singularity\singularity\code\g.py:263(new_game)
+  1750000    1.945    0.000    6.003    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:138(__init__)
+    10000    0.435    0.000    3.709    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:629(serialize_obj)
+    40000    0.604    0.000    3.088    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:255(give_time)
+   570000    0.513    0.000    2.796    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:91(serialize_obj)
+ 13550000    2.771    0.000    2.771    0.000 {built-in method builtins.isinstance}
+  3540000    2.748    0.000    2.748    0.000 {method 'copy' of 'numpy.ndarray' objects}
+   580000    0.826    0.000    2.703    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:259(restore_buyable_fields)
+ 10600000    2.635    0.000    2.635    0.000 {built-in method _codecs.utf_8_encode}
+ 10650000    2.574    0.000    2.574    0.000 {method 'write' of '_io.BytesIO' objects}
+   590000    1.490    0.000    2.116    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:248(serialize_buyable_fields)
+    60000    0.160    0.000    2.070    0.000 C:\ESS\MySingularity\singularity\singularity\code\location.py:227(deserialize_obj)
+   110000    1.291    0.000    1.739    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:482(recalc_cpu)
+    80000    0.179    0.000    1.582    0.000 C:\ESS\MySingularity\singularity\singularity\code\base.py:327(recalc_cpu)
+    20000    0.156    0.000    1.464    0.000 C:\ESS\MySingularity\singularity\singularity\code\base.py:185(__init__)
+    20000    0.146    0.000    1.454    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:138(initialize)
+  1750000    0.969    0.000    1.345    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:70(cost)
+   150000    0.251    0.000    1.255    0.000 C:\ESS\MySingularity\singularity\singularity\code\base.py:429(get_quality_for)
+    10000    0.053    0.000    1.213    0.000 C:\ESS\MySingularity\singularity\singularity\code\base.py:353(deserialize_obj)
+    40000    0.080    0.000    1.128    0.000 C:\ESS\MySingularity\singularity\singularity\code\base.py:271(switch_power)
+    20000    0.040    0.000    1.116    0.000 C:\ESS\MySingularity\singularity\singularity\code\location.py:190(add_base)
+   780000    0.572    0.000    1.109    0.000 C:\ESS\MySingularity\singularity\singularity\code\g.py:337(convert_internal_id)
+   770116    0.944    0.000    0.944    0.000 {built-in method numpy.array}
+    10000    0.011    0.000    0.872    0.000 C:\ESS\MySingularity\singularity\singularity\code\savegame.py:365(after_load_savegame)
+    10000    0.038    0.000    0.853    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py:274(load)
+
+
+
+============================================================
+TOP 20 NAJPOMALŠÍCH FUNKCIÍ (zoradené podľa celkového času):
+============================================================
+         139196594 function calls (113606594 primitive calls) in 77.568 seconds
+
+   Ordered by: internal time
+   List reduced from 219 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+32070000/10610000   11.993    0.000   23.019    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:334(_iterencode_dict)
+ 10600000    7.087    0.000   12.274    0.000 <frozen codecs>:373(write)
+13900000/9790000    7.058    0.000   16.334    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:278(_iterencode_list)
+    10000    5.701    0.001   44.252    0.004 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py:120(dump)
+ 10610000    3.165    0.000   26.199    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py:414(_iterencode)
+ 13550000    2.771    0.000    2.771    0.000 {built-in method builtins.isinstance}
+  3540000    2.748    0.000    2.748    0.000 {method 'copy' of 'numpy.ndarray' objects}
+ 10600000    2.635    0.000    2.635    0.000 {built-in method _codecs.utf_8_encode}
+ 10650000    2.574    0.000    2.574    0.000 {method 'write' of '_io.BytesIO' objects}
+  1750000    1.945    0.000    6.003    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:138(__init__)
+    20000    1.604    0.000    7.192    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:72(__init__)
+   590000    1.490    0.000    2.116    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:248(serialize_buyable_fields)
+  1710000    1.359    0.000    7.149    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:55(__init__)
+   110000    1.291    0.000    1.739    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:482(recalc_cpu)
+  1750000    0.969    0.000    1.345    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:70(cost)
+   770116    0.944    0.000    0.944    0.000 {built-in method numpy.array}
+   570000    0.932    0.000    6.475    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:98(deserialize_obj)
+   580000    0.826    0.000    2.703    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:259(restore_buyable_fields)
+   580000    0.739    0.000    0.739    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:175(cost_paid)
+   630000    0.713    0.000    0.713    0.000 C:\ESS\MySingularity\singularity\singularity\code\buyable.py:171(cost_paid)
+  2620000    0.641    0.000    0.641    0.000 {built-in method _json.encode_basestring_ascii}
+    40000    0.634    0.000    9.642    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:665(_load_auto_deserializable_tables)
+    40000    0.604    0.000    3.088    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:255(give_time)
+    10000    0.603    0.000    0.603    0.000 C:\Users\HP\AppData\Local\Programs\Python\Python312\Lib\json\decoder.py:343(raw_decode)
+  2186568    0.597    0.000    0.597    0.000 {method 'get' of 'dict' objects}
+   780000    0.572    0.000    1.109    0.000 C:\ESS\MySingularity\singularity\singularity\code\g.py:337(convert_internal_id)
+   570000    0.513    0.000    2.796    0.000 C:\ESS\MySingularity\singularity\singularity\code\tech.py:91(serialize_obj)
+  2270116    0.494    0.000    0.494    0.000 {built-in method builtins.getattr}
+    10000    0.435    0.000    3.709    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:629(serialize_obj)
+    10000    0.424    0.000   77.552    0.008 C:\ESS\MySingularity\singularity\tests\test_game_run.py:35(test_initial_game)
+    20000    0.414    0.000    0.793    0.000 C:\ESS\MySingularity\singularity\singularity\code\player.py:770(compute_future_resource_flow)
+    10000    0.402    0.000   65.236    0.007 C:\ESS\MySingularity\singularity\tests\test_game_run.py:25(save_and_load_game)
+  1440000    0.390    0.000    0.390    0.000 {built-in method builtins.id}
+    10000    0.378    0.000    6.419    0.001 C:\ESS\MySingularity\singularity\singularity\code\g.py:263(new_game)
+   320000    0.361    0.000    0.366    0.000 C:\ESS\MySingularity\singularity\singularity\code\prerequisite.py:30(available)
+    40000    0.319    0.000    0.548    0.000 C:\ESS\MySingularity\singularity\singularity\code\location.py:168(modify_cost)
+   340000    0.305    0.000    0.358    0.000 C:\ESS\MySingularity\singularity\singularity\code\g.py:240(all_bases)
+   760000    0.267    0.000    0.267    0.000 {method 'startswith' of 'str' objects}
+    10000    0.265    0.000   14.022    0.001 C:\ESS\MySingularity\singularity\singularity\code\player.py:679(deserialize_obj)
+   770000    0.260    0.000    0.260    0.000 C:\ESS\MySingularity\singularity\singularity\code\g.py:314(to_internal_id)
+
+
+
+C:\ESS\MySingularity\singularity>
