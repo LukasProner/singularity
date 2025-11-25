@@ -21,7 +21,14 @@ jobs:
         sudo apt-get install -y python3-pytest python3-numpy python3-pygame python3-pytest-cov python3-coverage python3-polib
     - name: Test with pytest
       run: |
-        PYTHONPATH=. py.test-3 -v
+        pytest -v --cov=singularity --cov-report=xml
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
 
   build-with-pypi-pkgs-pygame1:
 
@@ -48,4 +55,11 @@ jobs:
       run: |
         locale -a
         python3 --version || python --version
-        PYTHONPATH=. LC_ALL=C.UTF-8 pytest -v
+        PYTHONPATH=. LC_ALL=C.UTF-8 pytest -v --cov=singularity --cov-report=xml
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: pypi-pkgs
+        name: codecov-pypi
